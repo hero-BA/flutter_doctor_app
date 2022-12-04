@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     controller: _emailController,
                     hintText: 'Email',
+                    suffixIcon: const SizedBox(),
                   ),
                   const SizedBox(
                     height: 10,
@@ -66,6 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     controller: _passwordController,
                     hintText: 'Password',
+                    obsecureText: true,
+                    suffixIcon: const Icon(
+                      Icons.visibility,
+                    ),
                   ),
                 ],
               ),
