@@ -43,7 +43,10 @@ class AuthServices {
             );
 
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+              context,
+              HomeScreen.routeName,
+              (route) => false,
+            );
           });
     } catch (err) {
       showSnackBar(context, err.toString());

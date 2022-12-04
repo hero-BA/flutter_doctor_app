@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor_app/common/widgets/custom_button.dart';
 import 'package:flutter_doctor_app/common/widgets/custom_textformfield.dart';
+import 'package:flutter_doctor_app/features/auth/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login-screen';
@@ -12,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _signInFormKey = GlobalKey<FormState>();
+  final AuthServices authServices = AuthServices();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -22,6 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void signIn() {
+    authServices.signIn(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -65,7 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             CustomButton(
               text: 'Log In',
-              onTap: () {},
+              onTap: () => {
+                if (_signInFormKey.currentState!.validate()) {signIn()}
+              },
               color: Colors.lightGreen[500],
             ),
           ],

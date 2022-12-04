@@ -43,15 +43,13 @@ authRouter.post("/api/signin", async (req, res) => {
     const user = await User.findOne({ email });
     // Check if user with same email already exist
     if (!user) {
-      return res
-        .status(400)
-        .json({ msg: "User with this email does not exist!" });
+      return res.status(400).json({ msg: "Pogresan email ili password" });
     }
 
     const isPasswordMatch = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordMatch) {
-      res.status(400).json({ msg: "Incorrect password" });
+      res.status(400).json({ msg: "Pogresan email ili password" });
     }
 
     const token = jwt.sign({ id: user._id }, "passwordKey");

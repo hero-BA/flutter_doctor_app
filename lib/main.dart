@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor_app/features/auth/screens/login_screen.dart';
+import 'package:flutter_doctor_app/providers/user_provider.dart';
 import 'package:flutter_doctor_app/router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
