@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor_app/common/constants/error_handling.dart';
+import 'package:flutter_doctor_app/features/auth/screens/login_screen.dart';
 import 'package:flutter_doctor_app/features/home/screens/home_screen.dart';
 import 'package:flutter_doctor_app/providers/user_provider.dart';
 import 'package:http/http.dart' as http;
@@ -48,6 +49,20 @@ class AuthServices {
               (route) => false,
             );
           });
+    } catch (err) {
+      showSnackBar(context, err.toString());
+    }
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      await sharedPreferences.setString('x-auth-token', '');
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoginScreen.routeName, (route) => false);
     } catch (err) {
       showSnackBar(context, err.toString());
     }

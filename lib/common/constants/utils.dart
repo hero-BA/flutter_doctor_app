@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctor_app/features/auth/services/auth_service.dart';
 import 'package:flutter_doctor_app/features/home/screens/home_screen.dart';
 
 void showSnackBar(BuildContext context, String text) {
@@ -11,6 +12,7 @@ void showSnackBar(BuildContext context, String text) {
 
 void showAlertDialog(BuildContext context, String title, String text,
     String yesBtnText, String cancelBtnText) {
+  final AuthServices authServices = AuthServices();
   // set up the buttons
   Widget cancelButton = ElevatedButton(
     onPressed: () {
@@ -26,7 +28,9 @@ void showAlertDialog(BuildContext context, String title, String text,
     ),
   );
   Widget continueButton = ElevatedButton(
-    onPressed: () {},
+    onPressed: () {
+      authServices.logOut(context);
+    },
     style:
         ElevatedButton.styleFrom(backgroundColor: Colors.white, elevation: 0),
     child: Text(
